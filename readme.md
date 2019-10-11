@@ -11,6 +11,15 @@
 - [x] Clicking the fixed-position/floating button should smoothly animate to the top of the page (default easing, configurable duration, ~800ms default)
 - [x] The button should automatically hide by default, and show once the user is scrolled 500px down the page (hiding again if user scrolls back above the threshold)
 - [x] Should be a configuration-based threshold on when it shows (default otherwise)
-- [ ] Bonus points for being able to set a px value OR an element selector
+- [x] Bonus points for being able to set a px value OR an element selector
 - [x] On our modular content pages, the button also switches color dynamically between a light and dark version, depending on the content block underneath it
 - [x] Default to .dark, switch to .light when button intersects with an element with .dark class or an element with a .global-footer class
+
+
+## Usage
+The TopButton.vue component is a single file component. It does not require any props or any other components to function. The component renders a button that will return the user to the top of the page. If the fixed position button is above an elmenent with the class .dark or .global-footer it will reverse its colors.
+
+### Props
+- **px**: this prop takes a number. It defines how many pixels a user must scroll before the button becomes visible. The default is 500
+- **elselect**: this props takes an element ID. When the button reaches the same height as the specified element it will become visible. Default is false.
+- **scrolltime**: this prop takes a number. It defines the duration of the scroll to top animation in miliseconds. Default value is -1, which uses the default smooth scrolling attribute.

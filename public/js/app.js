@@ -45307,6 +45307,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: 500,
       type: Number
     },
+    // elementSelector defines an element to show the button on
+    elselect: {
+      default: false
+    },
     // scrollTime is how long it should take to reach the top
     scrollTime: {
       default: -1,
@@ -45353,6 +45357,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     onScroll: function onScroll() {
+      var _this2 = this;
+
       // this function is called when the window is scrolled
       // first it checks for intersections with any of the '.dark' & global-footer classes
       // this returns an array of intersections
@@ -45369,10 +45375,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.intersected = intersectArr.some(function (el) {
         return el === true;
       }) ? true : false;
+
+      if (this.elselect) {
+        var elementSelector = function elementSelector() {
+          var button = document.getElementById('top-button').getBoundingClientRect();
+          var rect = document.getElementById(_this2.elselect).getBoundingClientRect();
+          if (rect.bottom - rect.height <= button.bottom) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+        this.show = elementSelector();
+      }
+      // if any of the intersections are true then change the button display
+      this.intersected = intersectArr.some(function (el) {
+        return el === true;
+      }) ? true : false;
       // this detects scroll distance from the top to render the button conditionally
       this.scrolled = window.scrollY;
       // this conditionally renders the button
-      this.show = this.scrolled < this.px ? false : true;
+      if (!this.elselect) {
+        this.show = this.scrolled < this.px ? false : true;
+      }
     }
   },
   created: function created() {
@@ -45484,7 +45509,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.light[data-v-62b6b540] {\n  background-color: #fff;\n  color: #000;\n}\n.dark[data-v-62b6b540] {\n  background-color: #000;\n  color: #fff;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540]\n  {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.light[data-v-62b6b540] {\n  background-color: #fff;\n  color: #000;\n}\n.dark[data-v-62b6b540] {\n  background-color: #000;\n  color: #fff;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540] {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 

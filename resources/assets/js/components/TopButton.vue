@@ -18,6 +18,10 @@ export default {
       default: 500,
       type: Number
     },
+    // elementSelector defines an element to show the button on
+    elselect: {
+      default: false
+    },
     // scrollTime is how long it should take to reach the top
     scrollTime: {
       default: -1,
@@ -73,14 +77,31 @@ export default {
           rect.bottom - rect.height <= button.bottom &&
           rect.right - rect.width <= button.right) {
           return true
-        } else {return false}
+        } else {
+          return false
+        }
       })
       // if any of the intersections are true then change the button display
-      this.intersected = intersectArr.some((el) => el === true) ?  true : false
+      this.intersected = intersectArr.some((el) => el === true) ? true : false
+
+      if (this.elselect) {
+        const elementSelector = () => {
+          const button = document.getElementById('top-button').getBoundingClientRect()
+          const rect = document.getElementById(this.elselect).getBoundingClientRect()
+          if (rect.bottom - rect.height <= button.bottom) {
+            return true
+          } else {
+            return false
+          }
+        }
+        this.show = elementSelector()
+      }
+      // if any of the intersections are true then change the button display
+      this.intersected = intersectArr.some((el) => el === true) ? true : false
       // this detects scroll distance from the top to render the button conditionally
       this.scrolled = window.scrollY
       // this conditionally renders the button
-      this.show = this.scrolled < this.px ? false : true
+      if (!this.elselect) {this.show = this.scrolled < this.px ? false : true}
     }
   },
   created() {
@@ -109,8 +130,7 @@ export default {
 }
 
 .fade-enter,
-.fade-leave-to
-  {
+.fade-leave-to {
   opacity: 0;
 }
 </style>
