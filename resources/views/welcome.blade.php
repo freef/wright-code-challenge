@@ -92,12 +92,12 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
-            <top-button></top-button>
-                    <lorem-ipsum></lorem-ipsum>
-                    <lorem-ipsum></lorem-ipsum>
-                    <lorem-ipsum></lorem-ipsum>
-                    <lorem-ipsum></lorem-ipsum>
-                    <lorem-ipsum></lorem-ipsum>
+            <top-button :px='600' ></top-button>
+            <lorem-ipsum color='light'></lorem-ipsum>
+            <lorem-ipsum color='dark'></lorem-ipsum>
+            <lorem-ipsum color='light'></lorem-ipsum>
+            <lorem-ipsum color='dark'></lorem-ipsum>
+            <lorem-ipsum color='light'></lorem-ipsum>
 
         </div>
 

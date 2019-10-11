@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex">
+    <div :class='color' class="container d-flex">
     <h2>Lorem Ipsum</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend. Vel pretium lectus quam id leo in vitae. Viverra nam libero justo laoreet sit amet cursus sit. Platea dictumst quisque sagittis purus. Scelerisque mauris pellentesque pulvinar pellentesque. Elementum curabitur vitae nunc sed velit dignissim. Malesuada proin libero nunc consequat interdum varius sit. In cursus turpis massa tincidunt dui. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor.</p>
     <p> Hac habitasse platea dictumst quisque sagittis purus sit amet volutpat. Orci a scelerisque purus semper eget duis at tellus at. Nibh sed pulvinar proin gravida hendrerit lectus. Congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Morbi leo urna molestie at. Dui nunc mattis enim ut tellus elementum. Cras sed felis eget velit aliquet sagittis. Aliquam sem et tortor consequat id. Pharetra sit amet aliquam id diam maecenas ultricies mi eget. Ultrices tincidunt arcu non sodales neque sodales ut etiam sit. Id eu nisl nunc mi. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Eget felis eget nunc lobortis mattis aliquam faucibus purus in. Aenean pharetra magna ac placerat vestibulum lectus. Mollis nunc sed id semper risus in hendrerit gravida rutrum. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. At imperdiet dui accumsan sit amet. </p>
@@ -9,8 +9,19 @@
 
 <script>
     export default {
+        props: ['color'],
         mounted() {
             console.log('Component mounted.')
         }
     }
 </script>
+<style>
+.light {
+  color: black;
+  background-color: lightgray;
+}
+.dark {
+  color: lightgray;
+  background-color: black;
+}
+</style>
