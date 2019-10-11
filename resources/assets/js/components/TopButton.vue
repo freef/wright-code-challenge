@@ -72,11 +72,16 @@ export default {
     window.removeEventListener('scroll', this.onScroll);
   },
   mounted() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    }
     this.darkObserver = new IntersectionObserver(entries => {
         if (entries && entries[0].isIntersecting) {
           this.intersected= true
         } else { this.intersected= false}
-      })
+      }, options)
     document.querySelectorAll('.dark').forEach(el => this.darkObserver.observe(el))
     document.querySelectorAll('.globalFooter').forEach(el => this.darkObserver.observe(el))
   }

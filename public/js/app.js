@@ -44800,10 +44800,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['color'],
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
+    props: ['color']
 });
 
 /***/ }),
@@ -45327,13 +45324,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this2 = this;
 
+    var options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
     this.darkObserver = new IntersectionObserver(function (entries) {
       if (entries && entries[0].isIntersecting) {
         _this2.intersected = true;
       } else {
         _this2.intersected = false;
       }
-    });
+    }, options);
     document.querySelectorAll('.dark').forEach(function (el) {
       return _this2.darkObserver.observe(el);
     });
@@ -45517,7 +45519,7 @@ exports = module.exports = __webpack_require__(49)(false);
 
 
 // module
-exports.push([module.i, "\n.light {\n  color: black;\n  background-color: white;\n  padding: 1rem;\n  margin: 0;\n}\n.dark {\n  color: lightgray;\n  background-color: black;\n  padding: 1rem;\n  margin: 0;\n}\n", ""]);
+exports.push([module.i, "\n.light {\n  color: black;\n  background-color: white;\n}\n.dark {\n  color: lightgray;\n  background-color: black;\n}\n", ""]);
 
 // exports
 
