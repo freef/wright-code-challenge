@@ -2,7 +2,7 @@
 <div>
   <div id='top-button' class="container d-flex fixed">
     <transition name='fade'>
-      <button v-if="show" @click="toTop" id='to-top' class='button' :class='this.intersected ? "light" : "dark"'>To Top</button>
+      <button v-if="show" @click="toTop" id='to-top' class='button' :class='this.intersected ? "light-button" : "dark-button"'>To Top</button>
     </transition>
   </div>
   <template v-for="slot in $slots">
@@ -14,7 +14,7 @@
 export default {
   props: {
     px: {
-      default: -1,
+      default: 500,
       type: Number
     },
     scrollTime: {
@@ -61,42 +61,35 @@ export default {
       }
     },
     onScroll() {
+      const intersectArr = [].map.call(document.querySelectorAll('.dark'), (el) => {
+        const button = document.getElementById('top-button').getBoundingClientRect()
+        const rect = el.getBoundingClientRect()
+        if (rect.top + rect.height >= button.top &&
+          rect.left + rect.width >= button.left &&
+          rect.bottom - rect.height <= button.bottom &&
+          rect.right - rect.width <= button.right) {
+          return true
+        } else {return false}
+      })
+      this.intersected = intersectArr.some((el) => el === true) ?  true : false
       this.scrolled = window.scrollY
       this.show = this.scrolled < this.px ? false : true
-    },
+    }
   },
   created() {
     window.addEventListener('scroll', this.onScroll);
   },
   destroyed() {
     window.removeEventListener('scroll', this.onScroll);
-  },
-  mounted() {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5
-    }
-    this.darkObserver = new IntersectionObserver(entries => {
-        if (entries && entries[0].isIntersecting) {
-          this.intersected= true
-        } else { this.intersected= false}
-      }, options)
-    document.querySelectorAll('.dark').forEach(el => this.darkObserver.observe(el))
-    document.querySelectorAll('.globalFooter').forEach(el => this.darkObserver.observe(el))
   }
 }
 </script>
 <style>
-:root {
-  --light: 80;
-  --threshold: 60;
-}
 </style>
 <style scoped>
 .button {
+  padding: 1rem;
   border-radius: 1rem;
-  padding: 2rem;
 }
 
 .light {
@@ -105,6 +98,15 @@ export default {
 }
 
 .dark {
+  background-color: black;
+  color: white;
+}
+.light-button {
+  background-color: white;
+  color: black;
+}
+
+.dark-button {
   background-color: black;
   color: white;
 }

@@ -14,13 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/contact', function () {
-
-    $stuff = [
-      'thing 1',
-      'thing 2',
-      'the cat in the hat'
-    ];
-    return view('contact', ['stuff' => $stuff]);
-});

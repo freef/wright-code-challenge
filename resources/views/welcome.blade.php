@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Thunderpants</title>
+        <title>Thundercats</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -92,14 +92,15 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
-            <top-button :px='600' >  </top-button>
+            <top-button>
             <lorem-ipsum color='light'></lorem-ipsum>
             <lorem-ipsum color='dark'></lorem-ipsum>
-            <lorem-ipsum color='light'></lorem-ipsum>
+            <lorem-ipsum id='three' color='light'></lorem-ipsum>
             <lorem-ipsum color='dark'></lorem-ipsum>
             <lorem-ipsum color='light'></lorem-ipsum>
-            <lorem-ipsum color='dark'></lorem-ipsum>
+            <lorem-ipsum id='six' color='dark'></lorem-ipsum>
             <lorem-ipsum color='light'></lorem-ipsum>
+            </top-button>
 
 
         </div>
