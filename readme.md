@@ -11,6 +11,6 @@
 - [x] Clicking the fixed-position/floating button should smoothly animate to the top of the page (default easing, configurable duration, ~800ms default)
 - [x] The button should automatically hide by default, and show once the user is scrolled 500px down the page (hiding again if user scrolls back above the threshold)
 - [x] Should be a configuration-based threshold on when it shows (default otherwise)
-- [] Bonus points for being able to set a px value OR an element selector
+- [ ] Bonus points for being able to set a px value OR an element selector
 - [x] On our modular content pages, the button also switches color dynamically between a light and dark version, depending on the content block underneath it
 - [x] Default to .dark, switch to .light when button intersects with an element with .dark class or an element with a .global-footer class
