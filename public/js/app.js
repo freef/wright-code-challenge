@@ -45233,8 +45233,7 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(52)
-  __webpack_require__(54)
+  __webpack_require__(62)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
@@ -45279,86 +45278,10 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(53);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("cc3b1bd4", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TopButton.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TopButton.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(55);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("0f868f56", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./TopButton.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./TopButton.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.button[data-v-62b6b540] {\n  padding: 1rem;\n  border-radius: 1rem;\n}\n.light[data-v-62b6b540] {\n  background-color: white;\n  color: black;\n}\n.dark[data-v-62b6b540] {\n  background-color: black;\n  color: white;\n}\n.light-button[data-v-62b6b540] {\n  background-color: white;\n  color: black;\n}\n.dark-button[data-v-62b6b540] {\n  background-color: black;\n  color: white;\n}\n.none[data-v-62b6b540] {\n  display: none;\n}\n.fixed[data-v-62b6b540] {\n  position: fixed;\n  bottom: 100px;\n  right: 10%;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540]\n\n/* .fade-leave-active below version 2.1.8 */\n  {\n  opacity: 0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
 /* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45379,12 +45302,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    // px is where the to-top button should appear in pixels
     px: {
       default: 500,
       type: Number
     },
+    // scrollTime is how long it should take to reach the top
     scrollTime: {
-      default: 500,
+      default: -1,
       type: Number
     }
   },
@@ -45392,8 +45317,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       show: false,
       scrolled: false,
-      darkObserver: null,
-      lightObserver: null,
       intersected: false
     };
   },
@@ -45401,6 +45324,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     toTop: function toTop() {
       var _this = this;
 
+      // scroll to top
+      // if no prop is given, use default scrolling speed/effect
       if (this.scrollTime === -1) {
         window.scrollTo({
           top: 0,
@@ -45408,18 +45333,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           behavior: 'smooth'
         });
       } else {
+        // this function scrolls at a specified speed
         var start = this.scrolled;
         var currentTime = 0;
         var increment = 20;
         var distance = this.scrolled / this.scrollTime * increment;
-
         var animateScroll = function animateScroll() {
           currentTime += increment;
           start = start - distance;
           window.scrollTo({
             top: start,
             left: 0
-            // behavior: 'smooth'
           });
           if (currentTime < _this.scrollTime) {
             setTimeout(animateScroll, increment);
@@ -45429,7 +45353,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     onScroll: function onScroll() {
-      var intersectArr = [].map.call(document.querySelectorAll('.dark'), function (el) {
+      // this function is called when the window is scrolled
+      // first it checks for intersections with any of the '.dark' & global-footer classes
+      // this returns an array of intersections
+      var intersectArr = [].map.call(document.querySelectorAll('.dark', '.global-footer'), function (el) {
         var button = document.getElementById('top-button').getBoundingClientRect();
         var rect = el.getBoundingClientRect();
         if (rect.top + rect.height >= button.top && rect.left + rect.width >= button.left && rect.bottom - rect.height <= button.bottom && rect.right - rect.width <= button.right) {
@@ -45438,17 +45365,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           return false;
         }
       });
+      // if any of the intersections are true then change the button display
       this.intersected = intersectArr.some(function (el) {
         return el === true;
       }) ? true : false;
+      // this detects scroll distance from the top to render the button conditionally
       this.scrolled = window.scrollY;
+      // this conditionally renders the button
       this.show = this.scrolled < this.px ? false : true;
     }
   },
   created: function created() {
+    // sets event listeners
     window.addEventListener('scroll', this.onScroll);
   },
   destroyed: function destroyed() {
+    // removes envent listners when component leaves
     window.removeEventListener('scroll', this.onScroll);
   }
 });
@@ -45466,15 +45398,20 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "container d-flex fixed", attrs: { id: "top-button" } },
+        {
+          staticClass: "m-6 bg-deeppink flex fixed bottom-0 right-0 mb-16 mr-8",
+          attrs: { id: "top-button" }
+        },
         [
           _c("transition", { attrs: { name: "fade" } }, [
             _vm.show
               ? _c(
                   "button",
                   {
-                    staticClass: "button",
-                    class: this.intersected ? "light-button" : "dark-button",
+                    staticClass: "p-6 rounded-lg",
+                    class: this.intersected
+                      ? "bg-white text-black"
+                      : "bg-black text-white",
                     attrs: { id: "to-top" },
                     on: { click: _vm.toTop }
                   },
@@ -45508,6 +45445,49 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(63);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("731892f7", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TopButton.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62b6b540\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TopButton.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.light[data-v-62b6b540] {\n  background-color: #fff;\n  color: #000;\n}\n.dark[data-v-62b6b540] {\n  background-color: #000;\n  color: #fff;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540]\n  {\n  opacity: 0;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

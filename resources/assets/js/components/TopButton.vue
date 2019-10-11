@@ -1,8 +1,8 @@
 <template>
 <div>
-  <div id='top-button' class="container d-flex fixed">
+  <div id='top-button' class="m-6 bg-deeppink flex fixed bottom-0 right-0 mb-16 mr-8">
     <transition name='fade'>
-      <button v-if="show" @click="toTop" id='to-top' class='button' :class='this.intersected ? "light-button" : "dark-button"'>To Top</button>
+      <button v-if="show" @click="toTop" id='to-top' class='p-6 rounded-lg' :class='this.intersected ? "bg-white text-black" : "bg-black text-white"'>To Top</button>
     </transition>
   </div>
   <template v-for="slot in $slots">
@@ -13,12 +13,14 @@
 <script>
 export default {
   props: {
+    // px is where the to-top button should appear in pixels
     px: {
       default: 500,
       type: Number
     },
+    // scrollTime is how long it should take to reach the top
     scrollTime: {
-      default: 500,
+      default: -1,
       type: Number
     }
   },
@@ -26,13 +28,13 @@ export default {
     return {
       show: false,
       scrolled: false,
-      darkObserver: null,
-      lightObserver: null,
       intersected: false
     }
   },
   methods: {
     toTop() {
+      // scroll to top
+      // if no prop is given, use default scrolling speed/effect
       if (this.scrollTime === -1) {
         window.scrollTo({
           top: 0,
@@ -40,18 +42,17 @@ export default {
           behavior: 'smooth'
         })
       } else {
+        // this function scrolls at a specified speed
         let start = this.scrolled
         let currentTime = 0
         let increment = 20
         let distance = ((this.scrolled / this.scrollTime) * increment)
-
         const animateScroll = () => {
           currentTime += increment
           start = start - distance
           window.scrollTo({
             top: start,
             left: 0,
-            // behavior: 'smooth'
           })
           if (currentTime < this.scrollTime) {
             setTimeout(animateScroll, increment);
@@ -61,7 +62,10 @@ export default {
       }
     },
     onScroll() {
-      const intersectArr = [].map.call(document.querySelectorAll('.dark'), (el) => {
+      // this function is called when the window is scrolled
+      // first it checks for intersections with any of the '.dark' & global-footer classes
+      // this returns an array of intersections
+      const intersectArr = [].map.call(document.querySelectorAll('.dark', '.global-footer'), (el) => {
         const button = document.getElementById('top-button').getBoundingClientRect()
         const rect = el.getBoundingClientRect()
         if (rect.top + rect.height >= button.top &&
@@ -71,54 +75,32 @@ export default {
           return true
         } else {return false}
       })
+      // if any of the intersections are true then change the button display
       this.intersected = intersectArr.some((el) => el === true) ?  true : false
+      // this detects scroll distance from the top to render the button conditionally
       this.scrolled = window.scrollY
+      // this conditionally renders the button
       this.show = this.scrolled < this.px ? false : true
     }
   },
   created() {
+    // sets event listeners
     window.addEventListener('scroll', this.onScroll);
   },
   destroyed() {
+    // removes envent listners when component leaves
     window.removeEventListener('scroll', this.onScroll);
   }
 }
 </script>
-<style>
-</style>
-<style scoped>
-.button {
-  padding: 1rem;
-  border-radius: 1rem;
-}
 
+<style scoped>
 .light {
-  background-color: white;
-  color: black;
+  @apply bg-white text-black;
 }
 
 .dark {
-  background-color: black;
-  color: white;
-}
-.light-button {
-  background-color: white;
-  color: black;
-}
-
-.dark-button {
-  background-color: black;
-  color: white;
-}
-
-.none {
-  display: none;
-}
-
-.fixed {
-  position: fixed;
-  bottom: 100px;
-  right: 10%;
+  @apply bg-black text-white;
 }
 
 .fade-enter-active,
@@ -128,8 +110,6 @@ export default {
 
 .fade-enter,
 .fade-leave-to
-
-/* .fade-leave-active below version 2.1.8 */
   {
   opacity: 0;
 }
