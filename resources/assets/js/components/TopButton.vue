@@ -1,8 +1,12 @@
 <template>
-<div id='top-button' class="container d-flex fixed">
-  <transition name='fade'>
-    <button v-if="show" @click="toTop" id='to-top' class='button'>To Top</button>
-  </transition>
+<div>
+  <div id='top-button' class="container d-flex fixed">
+    <transition name='fade'>
+      <button v-if="show" @click="toTop" id='to-top' class='button' :class='this.intersected ? "light" : "dark"'>To Top</button>
+    </transition>
+  </div>
+  <template v-for="slot in $slots">
+    <slot /></template>
 </div>
 </template>
 
@@ -22,41 +26,39 @@ export default {
     return {
       show: false,
       scrolled: false,
-      observer: null,
+      darkObserver: null,
+      lightObserver: null,
       intersected: false
     }
   },
   methods: {
     toTop() {
       if (this.scrollTime === -1) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      })
-    } else {
-      let start = this.scrolled
-      let currentTime = 0
-      let increment = 20
-      let distance = ((this.scrolled/this.scrollTime) * increment)
-
-      const animateScroll =() => {
-        console.log('distance ' + distance)
-        console.log('start ' + start)
-        currentTime += increment
-        start = start - distance
         window.scrollTo({
-          top: start,
+          top: 0,
           left: 0,
-          // behavior: 'smooth'
+          behavior: 'smooth'
         })
-        if (currentTime < this.scrollTime) {
-          console.log(currentTime)
-          setTimeout(animateScroll, increment);
+      } else {
+        let start = this.scrolled
+        let currentTime = 0
+        let increment = 20
+        let distance = ((this.scrolled / this.scrollTime) * increment)
+
+        const animateScroll = () => {
+          currentTime += increment
+          start = start - distance
+          window.scrollTo({
+            top: start,
+            left: 0,
+            // behavior: 'smooth'
+          })
+          if (currentTime < this.scrollTime) {
+            setTimeout(animateScroll, increment);
+          }
         }
+        animateScroll();
       }
-      animateScroll();
-    }
     },
     onScroll() {
       this.scrolled = window.scrollY
@@ -70,21 +72,13 @@ export default {
     window.removeEventListener('scroll', this.onScroll);
   },
   mounted() {
-    // console.log(this.$slots.default)
-    // const config = {
-    //   root: null, // sets the framing element to the viewport
-    //   rootMargin: '0px',
-    //   threshold: 0.5
-    // }
-    // const target = document.querySelectorAll('.dark')
-    // this.observer = new IntersectionObserver(entries => {
-    //   entries.forEach(entry => {
-    //     if (entry.isIntersecting) {
-    //       console.log('intersected')
-    //     }
-    //   })
-    // })
-    // this.observer.observe(target, config)
+    this.darkObserver = new IntersectionObserver(entries => {
+        if (entries && entries[0].isIntersecting) {
+          this.intersected= true
+        } else { this.intersected= false}
+      })
+    document.querySelectorAll('.dark').forEach(el => this.darkObserver.observe(el))
+    document.querySelectorAll('.globalFooter').forEach(el => this.darkObserver.observe(el))
   }
 }
 </script>
@@ -97,11 +91,17 @@ export default {
 <style scoped>
 .button {
   border-radius: 1rem;
-  --switch: calc((var(--light) - var(--threshold)) * -100%);
-  background-color: hsl(0, 0%, var(--switch));
-  border: 2px solid black;
-  color: hsl(0, 0%, 0);
   padding: 2rem;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.dark {
+  background-color: black;
+  color: white;
 }
 
 .none {
@@ -111,6 +111,7 @@ export default {
 .fixed {
   position: fixed;
   bottom: 100px;
+  right: 10%;
 }
 
 .fade-enter-active,

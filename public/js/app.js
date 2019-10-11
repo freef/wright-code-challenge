@@ -45257,6 +45257,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -45273,7 +45277,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       show: false,
       scrolled: false,
-      observer: null,
+      darkObserver: null,
+      lightObserver: null,
       intersected: false
     };
   },
@@ -45294,8 +45299,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var distance = this.scrolled / this.scrollTime * increment;
 
         var animateScroll = function animateScroll() {
-          console.log('distance ' + distance);
-          console.log('start ' + start);
           currentTime += increment;
           start = start - distance;
           window.scrollTo({
@@ -45304,7 +45307,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // behavior: 'smooth'
           });
           if (currentTime < _this.scrollTime) {
-            console.log(currentTime);
             setTimeout(animateScroll, increment);
           }
         };
@@ -45323,21 +45325,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     window.removeEventListener('scroll', this.onScroll);
   },
   mounted: function mounted() {
-    // console.log(this.$slots.default)
-    // const config = {
-    //   root: null, // sets the framing element to the viewport
-    //   rootMargin: '0px',
-    //   threshold: 0.5
-    // }
-    // const target = document.querySelectorAll('.dark')
-    // this.observer = new IntersectionObserver(entries => {
-    //   entries.forEach(entry => {
-    //     if (entry.isIntersecting) {
-    //       console.log('intersected')
-    //     }
-    //   })
-    // })
-    // this.observer.observe(target, config)
+    var _this2 = this;
+
+    this.darkObserver = new IntersectionObserver(function (entries) {
+      if (entries && entries[0].isIntersecting) {
+        _this2.intersected = true;
+      } else {
+        _this2.intersected = false;
+      }
+    });
+    document.querySelectorAll('.dark').forEach(function (el) {
+      return _this2.darkObserver.observe(el);
+    });
+    document.querySelectorAll('.globalFooter').forEach(function (el) {
+      return _this2.darkObserver.observe(el);
+    });
   }
 });
 
@@ -45351,23 +45353,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container d-flex fixed", attrs: { id: "top-button" } },
     [
-      _c("transition", { attrs: { name: "fade" } }, [
-        _vm.show
-          ? _c(
-              "button",
-              {
-                staticClass: "button",
-                attrs: { id: "to-top" },
-                on: { click: _vm.toTop }
-              },
-              [_vm._v("To Top")]
-            )
-          : _vm._e()
-      ])
+      _c(
+        "div",
+        { staticClass: "container d-flex fixed", attrs: { id: "top-button" } },
+        [
+          _c("transition", { attrs: { name: "fade" } }, [
+            _vm.show
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "button",
+                    class: this.intersected ? "light" : "dark",
+                    attrs: { id: "to-top" },
+                    on: { click: _vm.toTop }
+                  },
+                  [_vm._v("To Top")]
+                )
+              : _vm._e()
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.$slots, function(slot) {
+        return [_vm._t("default")]
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -45464,7 +45477,7 @@ exports = module.exports = __webpack_require__(49)(false);
 
 
 // module
-exports.push([module.i, "\n.button[data-v-62b6b540] {\n  border-radius: 1rem;\n  --switch: calc((var(--light) - var(--threshold)) * -100%);\n  background-color: hsl(0, 0%, var(--switch));\n  border: 2px solid black;\n  color: hsl(0, 0%, 0);\n  padding: 2rem;\n}\n.none[data-v-62b6b540] {\n  display: none;\n}\n.fixed[data-v-62b6b540] {\n  position: fixed;\n  bottom: 100px;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540]\n\n/* .fade-leave-active below version 2.1.8 */\n  {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.button[data-v-62b6b540] {\n  border-radius: 1rem;\n  padding: 2rem;\n}\n.light[data-v-62b6b540] {\n  background-color: white;\n  color: black;\n}\n.dark[data-v-62b6b540] {\n  background-color: black;\n  color: white;\n}\n.none[data-v-62b6b540] {\n  display: none;\n}\n.fixed[data-v-62b6b540] {\n  position: fixed;\n  bottom: 100px;\n  right: 10%;\n}\n.fade-enter-active[data-v-62b6b540],\n.fade-leave-active[data-v-62b6b540] {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n.fade-enter[data-v-62b6b540],\n.fade-leave-to[data-v-62b6b540]\n\n/* .fade-leave-active below version 2.1.8 */\n  {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -45504,7 +45517,7 @@ exports = module.exports = __webpack_require__(49)(false);
 
 
 // module
-exports.push([module.i, "\n.light {\n  color: black;\n  background-color: lightgray;\n}\n.dark {\n  color: lightgray;\n  background-color: black;\n}\n", ""]);
+exports.push([module.i, "\n.light {\n  color: black;\n  background-color: white;\n  padding: 1rem;\n  margin: 0;\n}\n.dark {\n  color: lightgray;\n  background-color: black;\n  padding: 1rem;\n  margin: 0;\n}\n", ""]);
 
 // exports
 

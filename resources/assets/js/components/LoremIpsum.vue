@@ -18,10 +18,14 @@
 <style>
 .light {
   color: black;
-  background-color: lightgray;
+  background-color: white;
+  padding: 1rem;
+  margin: 0;
 }
 .dark {
   color: lightgray;
   background-color: black;
+  padding: 1rem;
+  margin: 0;
 }
 </style>
